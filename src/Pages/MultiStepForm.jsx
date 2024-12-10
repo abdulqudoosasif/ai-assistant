@@ -237,8 +237,10 @@ const StepForm = ({ stepName, fields, formData, onInputChange }) => {
             value={formData[field.name] || ""}
             onChange={(e) => onInputChange(stepName, field.name, e.target.value)}
             placeholder={field.placeholder}
-            className={`w-full p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
-              isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
+            className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
+              isDarkMode
+                ? 'bg-gray-700 text-gray-200 border-gray-600'
+                : 'bg-white/10 text-black border-[1px]'
             }`}
           />
         </div>

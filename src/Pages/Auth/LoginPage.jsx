@@ -62,7 +62,9 @@ const LoginForm = () => {
           onChange={(e) => setUser(e.target.value)}
           placeholder="Email"
           className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
-            isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
+            isDarkMode
+              ? 'bg-gray-700 text-gray-200 border-gray-600'
+              : 'bg-white/10 text-black border-[1px]'
           }`}
         />
 
@@ -73,8 +75,10 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className={`w-full p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
-              isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
+            className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
+              isDarkMode
+                ? 'bg-gray-700 text-gray-200 border-gray-600'
+                : 'bg-white/10 text-black border-[1px]'
             }`}
           />
           <span
