@@ -62,7 +62,7 @@ const Signup = () => {
       <button
         type="button"
         onClick={toggleDarkMode}
-        className="absolute py-1 px-3 top-1 right-1 z-40 rounded-md text-white text-sm font-semibold"
+        className="absolute py-1 px-3 top-1 right-1 z-999 rounded-md text-white text-sm font-semibold"
       >
         {isDarkMode ? <IoSunny /> : <BsFillMoonStarsFill className="text-gray-800" />}
       </button>
