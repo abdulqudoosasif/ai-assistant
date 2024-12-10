@@ -1,59 +1,36 @@
 import React, { useState } from 'react';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
-import { FaEye, FaEyeLowVision} from "react-icons/fa6";
+import { FaEye, FaEyeLowVision } from "react-icons/fa6";
 import { IoSunny } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTheme } from '../../components/Button/ThemeProvider';
 
 const LoginForm = () => {
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const navigation = useNavigate()
+  const { isDarkMode, toggleDarkMode } = useTheme(); // Correct usage of useTheme
+  const navigate = useNavigate();
 
-  const handleLogin =async () => {
-    // try{
-    //   const response= await fetch('http://127.0.0.1:8000/api/token/',{
-    //     method:"POST",
-    //     headers: {
-    //       "Content-Type":"application/json"
-    //     },
-    //     body:JSON.stringify({
-    //     username:user,
-    //     password:password,
-    //     })
-    //   })
-
-    //   if (response.ok) {
-        navigation('/multi-step-form');
-    //     // alert('Login successful');
-    //   } else {
-    //     const errorData = await response.json();
-    //     alert(errorData.detail || 'An error occurred. Please try again.');
-    //   }
-      
-    // }catch (error) {
-    //   console.error('Error:', error);
-    //   alert('An error occurred. Please try again.');
-    // }
-  }
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
+  const handleLogin = async () => {
+    // Simulated login logic
+    navigate('/multi-step-form');
   };
+
   return (
     <div
       className={`min-h-screen flex relative items-center justify-center px-4 ${
         isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-black'
       } transition-all`}
     >
-       <button
-            type="button"
-            onClick={toggleDarkMode}
-            className=" absolute py-1 px-3 top-1 right-1 rounded-md  text-white text-sm font-semibold"
-            >
-             {isDarkMode ? <IoSunny  /> : <BsFillMoonStarsFill  className=' text-gray-800'/>}
-          </button>
+      <button
+        type="button"
+        onClick={toggleDarkMode}
+        className="absolute py-1 px-3 top-1 right-1 rounded-md text-white text-sm font-semibold"
+      >
+        {isDarkMode ? <IoSunny /> : <BsFillMoonStarsFill className="text-gray-800" />}
+      </button>
+
       {/* Background shapes */}
       <div className="absolute w-[90%] max-w-[430px] h-[520px]">
         <div
@@ -85,9 +62,7 @@ const LoginForm = () => {
           onChange={(e) => setUser(e.target.value)}
           placeholder="Email"
           className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
-            isDarkMode
-              ? 'bg-gray-700 text-gray-200 border-gray-600'
-              : 'bg-white/10 text-black border-gray-300'
+            isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
           }`}
         />
 
@@ -99,9 +74,7 @@ const LoginForm = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className={`w-full p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
-              isDarkMode
-                ? 'bg-gray-700 text-gray-200 border-gray-600'
-                : 'bg-white/10 text-black border-gray-300'
+              isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
             }`}
           />
           <span
@@ -119,7 +92,8 @@ const LoginForm = () => {
           onClick={handleLogin}
           className={`w-full mt-6 py-3 font-semibold rounded-md transition ${
             isDarkMode ? 'bg-indigo-600 hover:bg-indigo-500' : 'bg-black text-white hover:bg-gray-700'
-          }`}        >
+          }`}
+        >
           Log In
         </button>
 

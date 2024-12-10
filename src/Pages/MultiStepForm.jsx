@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { IoSunny } from "react-icons/io5";
+import { useTheme } from "../components/Button/ThemeProvider";
 
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const steps = [
     "Personal Profile",
@@ -150,9 +151,6 @@ const MultiStepForm = () => {
     navigate("/home");
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
 
   return (
     <div
@@ -212,17 +210,22 @@ const MultiStepForm = () => {
           </button>
           <button
             onClick={handleSkip}
-            className="w-full py-2 mt-2 rounded-md border border-black text-black"
+            className={`w-full mt-4 py-2 rounded-md ${
+              isDarkMode
+                ? " border border-white text-white"
+                : " border border-black text-black"
+            }`}
           >
-            Skip
+             Skip
           </button>
         </div>
       </div>
     </div>
   );
 };
-
+  
 const StepForm = ({ stepName, fields, formData, onInputChange }) => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   return (
     <div>
       {fields.map((field) => (
@@ -234,7 +237,9 @@ const StepForm = ({ stepName, fields, formData, onInputChange }) => {
             value={formData[field.name] || ""}
             onChange={(e) => onInputChange(stepName, field.name, e.target.value)}
             placeholder={field.placeholder}
-            className="w-full mt-2 p-3 rounded-md outline-none border border-gray-300 text-sm"
+            className={`w-full p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
+              isDarkMode ? 'bg-gray-700 text-gray-200 border-gray-600' : 'bg-white/10 text-black border-gray-300'
+            }`}
           />
         </div>
       ))}
