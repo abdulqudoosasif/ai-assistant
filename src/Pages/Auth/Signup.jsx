@@ -26,31 +26,31 @@ const Signup = () => {
       return;
     }
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/register/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-          password2: confirmPassword,
-          email,
-          first_name: firstName,
-          last_name: lastName,
-        }),
-      });
+    // try {
+    //   const response = await fetch('http://127.0.0.1:8000/api/register/', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify({
+    //       username,
+    //       password,
+    //       password2: confirmPassword,
+    //       email,
+    //       first_name: firstName,
+    //       last_name: lastName,
+    //     }),
+    //   });
 
-      if (response.ok) {
+    //   if (response.ok) {
         alert('Sign-Up Successful!');
-      } else {
-        alert('Sign-Up Failed. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again.');
-    }
+    //   } else {
+    //     alert('Sign-Up Failed. Please try again.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    //   alert('An error occurred. Please try again.');
+    // }
   };
 
   return (
