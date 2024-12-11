@@ -1,4 +1,6 @@
 import React from "react";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 import Sidebar from "../components/dashboard/Sidebar";
 import Header from "../components/dashboard/Header";
 import Stats from "../components/dashboard/Stats";
@@ -9,11 +11,11 @@ const Home = () => {
   return (
     <div className="flex h-screen bg-gray-100 overflow-hidden">
       <Sidebar />
-      <div className="flex-1 p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+      <SimpleBar className="flex-1 p-6" style={{ height: "100vh" }}>
         <Header />
         <Stats />
         <Timeline />
-      </div>
+      </SimpleBar>
       <ProfileSection />
     </div>
   );
