@@ -23,7 +23,7 @@ const Header = () => {
         <div className="ml-[100px]">
           <p className="text-sm text-gray-500">{formattedDate}</p>
           <h1 className="text-2xl font-bold">Welcome to AI Assistant</h1>
-          <p className="text-sm text-gray-500">What can I help you with today?</p>
+          <p className="text-sm text-gray-500">What I can help you today?</p>
         </div>
       </div>
       <button className="bg-blue-500 text-white px-4 py-2 gap-2 rounded-lg flex items-center">

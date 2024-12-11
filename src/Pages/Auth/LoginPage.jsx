@@ -35,12 +35,12 @@ const LoginForm = () => {
       <div className="absolute w-[90%] max-w-[430px] h-[520px]">
         <div
           className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -top-10 -left-10 sm:-top-20 sm:-left-20 ${
-            isDarkMode ? 'bg-gradient-to-br from-purple-700 to-indigo-500' : 'bg-gradient-to-br  from-[#000] to-[#e5ecff]'
+            isDarkMode ? 'bg-gradient-to-br from-purple-700 to-indigo-500' : 'bg-gradient-to-br  from-blue-500 to-[#a4acc1]'
           }`}
         ></div>
         <div
           className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -bottom-10 -right-6 sm:-bottom-20 sm:-right-8 ${
-            isDarkMode ? 'bg-gradient-to-r from-purple-700 to-indigo-500' : 'bg-gradient-to-br  to-[#000] from-[#e5ecff]'
+            isDarkMode ? 'bg-gradient-to-r from-purple-700 to-indigo-500' : 'bg-gradient-to-br  to-blue-500 from-[#a4acc1]'
           }`}
         ></div>
       </div>
@@ -95,7 +95,7 @@ const LoginForm = () => {
           type="button"
           onClick={handleLogin}
           className={`w-full mt-6 py-3 font-semibold rounded-md transition ${
-            isDarkMode ? 'bg-indigo-600 hover:bg-indigo-500' : 'bg-black text-white hover:bg-gray-700'
+            isDarkMode ? 'bg-indigo-600 hover:bg-indigo-500' : 'bg-blue-500 text-white hover:bg-gray-700'
           }`}
         >
           Log In

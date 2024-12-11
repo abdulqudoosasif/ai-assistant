@@ -45,7 +45,7 @@ const CommunicationForm=()=>{
     <div className="p-6 rounded-lg shadow bg-indigo-100 cursor-pointer" onClick={CommunicationForm}>
       <div className="text-2xl"><FaPersonMilitaryToPerson /> </div>
       <h3 className="text-lg font-bold mt-2">Communication</h3>
-      <p className="text-2xl">48</p>
+      <p className="text-sm">Your Communication Information</p>
     </div>
 
 
@@ -63,7 +63,7 @@ const CommunicationForm=()=>{
     <div className="p-6 rounded-lg shadow bg-indigo-100 cursor-pointer" onClick={CommunicationForm}>
       <div className="text-2xl"><FaPersonMilitaryToPerson /> </div>
       <h3 className="text-lg font-bold mt-2">Communication</h3>
-      <p className="text-2xl">48</p>
+      <p className="text-sm">Your Communication Information</p>
     </div>
     <div className="p-6 rounded-lg shadow bg-teal-100 cursor-pointer" onClick={FamilyRelationshipsForm}>
       <div className="text-2xl"><MdFamilyRestroom /></div>

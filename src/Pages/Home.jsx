@@ -14,7 +14,7 @@ const Home = () => {
       <SimpleBar className="flex-1 p-6" style={{ height: "100vh" }}>
         <Header />
         <Stats />
-        <Timeline />
+        {/* <Timeline /> */}
       </SimpleBar>
       <ProfileSection />
     </div>
