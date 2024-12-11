@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { IoSunny } from "react-icons/io5";
-import { useTheme } from "../components/Button/ThemeProvider";
+import { useTheme } from "../context/Button/ThemeProvider";
 
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -30,7 +30,7 @@ const MultiStepForm = () => {
     "Insurance",
   ];
 
-  const formFields = {
+  const formFields = { 
     "Personal Profile": [
       { name: "fullName", label: "Full Name", placeholder: "John Doe" },
       { name: "dob", label: "Date of Birth", placeholder: "YYYY-MM-DD" },
@@ -151,7 +151,6 @@ const MultiStepForm = () => {
     navigate("/home");
   };
 
-
   return (
     <div
       className={`min-h-screen flex relative items-center justify-center px-4 ${
@@ -208,7 +207,7 @@ const MultiStepForm = () => {
           >
             {currentStep < steps.length - 1 ? "Yes, continue to next Step" : "Finish"}
           </button>
-          <button
+          <button 
             onClick={handleSkip}
             className={`w-full mt-4 py-2 rounded-md ${
               isDarkMode
@@ -223,7 +222,6 @@ const MultiStepForm = () => {
     </div>
   );
 };
-  
 const StepForm = ({ stepName, fields, formData, onInputChange }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   return (

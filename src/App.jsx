@@ -5,7 +5,11 @@ import LoginPage from './Pages/Auth/LoginPage';
 import Signup from './Pages/Auth/Signup';
 import MultiStepForm from './Pages/MultiStepForm';
 import Home from './Pages/Home';
-import { ThemeProvider } from './components/Button/ThemeProvider';
+import { ThemeProvider } from './context/Button/ThemeProvider';
+import PersonalProfileForm from './Forms/PersonalProfileForm';
+import FamilyRelationshipsForm from './Forms/FamilyRelationshipsForm';
+import DailyScheduleForm from './Forms/DailyScheduleForm';
+import CommunicationForm from './Forms/CommunicationForm';
 
 export default function App() {
   return (
@@ -16,6 +20,10 @@ export default function App() {
           <Route path="/sign-up" element={<Signup />} />
           <Route path="/multi-step-form" element={<MultiStepForm />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/personal-profile-form" element={<PersonalProfileForm />} />
+          <Route path="/family-relationships-form" element={<FamilyRelationshipsForm />} />
+          <Route path="/daily-schedule-form" element={<DailyScheduleForm />} />
+          <Route path="/communication-form" element={<CommunicationForm />} />
         </Routes>
       </Router>
     </ThemeProvider>
