@@ -6,7 +6,7 @@ import { TiHome } from "react-icons/ti";
 
 const Sidebar = () => {
   return (
-    <div className="w-16 bg-blue-500 rounded-lg m-2  py-4  flex flex-col items-center justify-between">
+    <div className="w-16 bg-blue-700 rounded-lg m-2  py-4  flex flex-col items-center justify-between">
      <div className="text-white flex flex-col items-center">
      <button
           className="flex flex-col items-center my-4 text-sm"

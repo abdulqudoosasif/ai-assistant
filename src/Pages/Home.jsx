@@ -5,7 +5,7 @@ import Sidebar from "../components/dashboard/Sidebar";
 import Header from "../components/dashboard/Header";
 import Stats from "../components/dashboard/Stats";
 import Timeline from "../components/dashboard/Timeline";
-import ProfileSection from "../components/dashboard/ProfileSection";
+import ProfileSection from "../components/dashboard/AssistantProfileSection";
 
 const Home = () => {
   return (
