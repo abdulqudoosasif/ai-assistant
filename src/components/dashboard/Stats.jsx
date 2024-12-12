@@ -25,7 +25,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowPersonalProfileForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-pink-400 to-red-600 text-white rounded-md p-2 w-fit">
           <IoPersonSharp />
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Personal Form</h3>
@@ -57,7 +57,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowDailyScheduleForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 text-white rounded-md p-2 w-fit">
           <AiFillSchedule />
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
@@ -72,7 +72,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowCommunicationForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-green-500 to-teal-700 text-white rounded-md p-2 w-fit">
           <FaPersonMilitaryToPerson />{" "}
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Communication</h3>
@@ -88,7 +88,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowPersonalProfileForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-purple-800 via-indigo-700 to-blue-600 text-white rounded-md p-2 w-fit">
           <IoPersonSharp />
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Personal Form</h3>
@@ -103,7 +103,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowFamilyRelationshipForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-indigo-500 via-blue-400 to-sky-300 text-white rounded-md p-2 w-fit">
           <MdFamilyRestroom />
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
@@ -120,7 +120,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowDailyScheduleForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-yellow-400 to-orange-500 text-white rounded-md p-2 w-fit">
           <AiFillSchedule />
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
@@ -135,7 +135,7 @@ const Stats = () => {
         className="p-6 rounded-lg shadow bg-white  cursor-pointer"
         onClick={() => setShowCommunicationForm(true)}
       >
-        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-gray-300 via-blue-200 to-cyan-400 text-white rounded-md p-2 w-fit">
           <FaPersonMilitaryToPerson />{" "}
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Communication</h3>
