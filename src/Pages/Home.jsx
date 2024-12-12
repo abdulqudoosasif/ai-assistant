@@ -9,7 +9,7 @@ import ProfileSection from "../components/dashboard/AssistantProfileSection";
 
 const Home = () => {
   return (
-    <div className="flex h-screen bg-gray-100 overflow-hidden">
+    <div className="flex h-screen bg-gray-100 ">
       <Sidebar />
       <SimpleBar className="flex-1 p-6" style={{ height: "100vh" }}>
         <Header />
