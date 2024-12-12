@@ -146,7 +146,102 @@ const Stats = () => {
       {showCommunicationForm && (
         <CommunicationForm onClose={() => setShowCommunicationForm(false)} />
       )}
-      
+       <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowPersonalProfileForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-pink-400 to-red-600 text-white rounded-md p-2 w-fit">
+          <IoPersonSharp />
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Personal Form</h3>
+        <p className="text-sm leading-4">Tell Us About Yourself</p>
+      </div>
+      {showPersonalProfileForm && (
+        <PersonalProfileForm
+          onClose={() => setShowPersonalProfileForm(false)}
+        />
+      )}
+      <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowFamilyRelationshipForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-blue-500 to-cyan-600 text-white rounded-md p-2 w-fit">
+          <MdFamilyRestroom />
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
+          Family and Relationships
+        </h3>
+        <p className="text-sm leading-4">Tell Us About Your Family</p>
+      </div>
+      {showFamilyRelationshipForm && (
+        <FamilyRelationshipsForm
+          onClose={() => setShowFamilyRelationshipForm(false)}
+        />
+      )}
+      <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowDailyScheduleForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600 text-white rounded-md p-2 w-fit">
+          <AiFillSchedule />
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
+          Daily Schedule and Tasks
+        </h3>
+        <p className="text-sm leading-4">Plan and Prioritize Your Day</p>
+      </div>
+      {showDailyScheduleForm && (
+        <DailyScheduleForm onClose={() => setShowDailyScheduleForm(false)} />
+      )}
+      <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowCommunicationForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-green-500 to-teal-700 text-white rounded-md p-2 w-fit">
+          <FaPersonMilitaryToPerson />{" "}
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Communication</h3>
+        <p className="text-sm leading-4">Your Communication Information</p>
+      </div>
+      {showCommunicationForm && (
+        <CommunicationForm onClose={() => setShowCommunicationForm(false)} />
+      )}
+
+
+      {/* 2 */}
+      <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowPersonalProfileForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-red-500 to-orange-500 text-white rounded-md p-2 w-fit">
+        <RiInformation2Fill />
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">Financial Information</h3>
+        <p className="text-sm leading-4">"Your Income and Expense Information</p>
+      </div>
+      {showPersonalProfileForm && (
+        <PersonalProfileForm
+          onClose={() => setShowPersonalProfileForm(false)}
+        />
+      )}
+      <div
+        className="p-6 rounded-lg shadow bg-white  cursor-pointer"
+        onClick={() => setShowFamilyRelationshipForm(true)}
+      >
+        <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-indigo-500 via-blue-400 to-sky-300 text-white rounded-md p-2 w-fit">
+        <MdHealthAndSafety />
+        </div>
+        <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
+        Health and Fitness
+        </h3>
+        <p className="text-sm leading-4">Share Your Health and Fitness Goals</p>
+      </div>
+      {showFamilyRelationshipForm && (
+        <FamilyRelationshipsForm
+          onClose={() => setShowFamilyRelationshipForm(false)}
+        />
+      )}
+
     </div>
   );
 };
