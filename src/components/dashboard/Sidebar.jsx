@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <div>
       {/* Sidebar for desktop */}
-      <div className="hidden lg:flex w-16 bg-blue-700 rounded-lg m-2 py-4 flex-col items-center justify-between">
+      <div className="hidden lg:flex w-16 bg-blue-700 rounded-lg m-2 py-4 flex-col items-center h-[98%] justify-between">
         <div className="text-white flex flex-col items-center">
           <button onClick={handleHome} className="flex flex-col items-center my-4 text-sm">
             <div className="text-2xl"><TiHome /></div>
