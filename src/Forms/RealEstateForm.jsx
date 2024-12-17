@@ -32,7 +32,7 @@ const RealEstateForm = ({ onClose }) => {
     <div className="fixed p-3 mt-[12%] lg:mt-0 md:mt-0 z-20 inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className={`relative w-full max-w-[500px] h-[500px] overflow-y-auto my-8 p-6 sm:p-10 rounded-lg shadow-lg border ${
+        className={`relative w-full max-w-[400px] max-h-[70vh] overflow-y-auto my-8 p-6 sm:p-10 rounded-lg shadow-lg border ${
           isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"
         }`}
       >

@@ -26,7 +26,7 @@ const CelebrationsForm = ({ onClose }) => {
     <div className="fixed mt-[12%] lg:mt-0 md:mt-0   z-20 p-3 inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
       <form
         onSubmit={handleSubmit}
-        className={`relative w-full max-w-[600px] h-[400px] overflow-y-auto my-8 p-6 sm:p-10 rounded-lg shadow-lg border ${
+        className={`relative w-full max-w-[400px] max-h-[70vh] overflow-y-auto my-8 p-6 sm:p-10 rounded-lg shadow-lg border ${
           isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"
         }`}
       >

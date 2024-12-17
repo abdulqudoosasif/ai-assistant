@@ -28,7 +28,7 @@ const FamilyRelationshipsForm = ({ onClose }) => {
 
       <form
         onSubmit={handleSubmit}
-        className={`relative w-full max-w-[440px] h-[600px] overflow-y-auto  my-8 p-6 sm:p-10 rounded-lg  shadow-lg border ${
+        className={`relative w-full max-w-[400px] max-h-[70vh] overflow-y-auto  my-8 p-6 sm:p-10 rounded-lg  shadow-lg border ${
           isDarkMode
             ? "bg-gray-800 border-gray-700"
             : "bg-white"
