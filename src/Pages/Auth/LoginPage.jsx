@@ -6,67 +6,93 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/Button/ThemeProvider';
 
 const LoginForm = () => {
-  const [user, setUser] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const { isDarkMode, toggleDarkMode } = useTheme(); // Correct usage of useTheme
+  const [errors, setErrors] = useState({});
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
 
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!username) newErrors.username = 'Username is required.';
+    if (!password) newErrors.password = 'Password is required.';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleLogin = async () => {
-    // Simulated login logic
-    navigate('/multi-step-form');
+    if (!validateForm()) return;
+
+    try {
+      const response = await fetch('https://personalai-backend.onrender.com/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem('token', data.access);
+        navigate('/multi-step-form');
+      } else {
+        const errorData = await response.json();
+        alert(errorData.detail || 'Login Failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
     <div
-      className={`min-h-screen flex relative items-center justify-center px-4 ${
+      className={`relative min-h-screen flex items-center justify-center px-4 transition-all overflow-hidden ${
         isDarkMode ? 'bg-gray-900 text-gray-200' : 'bg-white text-black'
-      } transition-all`}
+      }`}
     >
       <button
         type="button"
         onClick={toggleDarkMode}
-        className="absolute py-1 px-3 top-1 right-1 rounded-md text-white text-sm font-semibold"
+        className="absolute py-1 px-3 top-1 right-1 z-50 rounded-md text-white text-sm font-semibold"
       >
         {isDarkMode ? <IoSunny /> : <BsFillMoonStarsFill className="text-gray-800" />}
       </button>
 
-      {/* Background shapes */}
-      <div className="absolute w-[90%] max-w-[430px] h-[520px]">
-        <div
-          className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -top-10 -left-10 sm:-top-20 sm:-left-20 ${
-            isDarkMode ? 'bg-gradient-to-br from-purple-700 to-indigo-500' : 'bg-gradient-to-br  from-blue-500 to-[#a4acc1]'
-          }`}
-        ></div>
-        <div
-          className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -bottom-10 -right-6 sm:-bottom-20 sm:-right-8 ${
-            isDarkMode ? 'bg-gradient-to-r from-purple-700 to-indigo-500' : 'bg-gradient-to-br  to-blue-500 from-[#a4acc1]'
-          }`}
-        ></div>
-      </div>
+      {/* Background Shapes */}
+      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"></div>
 
       {/* Login Form */}
       <form
-        className={`relative w-full max-w-[400px] p-6 sm:p-10 rounded-lg backdrop-blur-md shadow-lg border ${
-          isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white/10 border-white/10'
+        className={`relative w-full max-w-[400px] p-6 sm:p-10 rounded-lg backdrop-blur-md shadow-lg border my-4 z-10 ${
+          isDarkMode
+            ? 'bg-gray-800 border-gray-700'
+            : 'bg-white/10 border-white/10'
         }`}
       >
-        <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">
-          Login Here
-        </h3>
+        <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">Log In</h3>
 
         <label className="block text-sm font-medium mt-4">Username</label>
         <input
-          type="email"
-          value={user}
-          onChange={(e) => setUser(e.target.value)}
-          placeholder="Email"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
           className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
             isDarkMode
               ? 'bg-gray-700 text-gray-200 border-gray-600'
               : 'bg-white/10 text-black border-[1px]'
           }`}
         />
+        {errors.username && <p className="text-red-500 text-xs mt-1">{errors.username}</p>}
 
         <label className="block text-sm font-medium mt-4">Password</label>
         <div className="relative w-full mt-2">
@@ -75,7 +101,7 @@ const LoginForm = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
-            className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
+            className={`w-full p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
               isDarkMode
                 ? 'bg-gray-700 text-gray-200 border-gray-600'
                 : 'bg-white/10 text-black border-[1px]'
@@ -83,19 +109,20 @@ const LoginForm = () => {
           />
           <span
             onClick={() => setShowPassword(!showPassword)}
-            className={`absolute inset-y-0 right-3 flex items-center cursor-pointer ${
-              isDarkMode ? 'text-gray-200' : 'text-black'
-            }`}
+            className="absolute inset-y-0 right-3 flex items-center cursor-pointer"
           >
             {showPassword ? <FaEye /> : <FaEyeLowVision />}
           </span>
         </div>
+        {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
 
         <button
           type="button"
           onClick={handleLogin}
           className={`w-full mt-6 py-3 font-semibold rounded-md transition ${
-            isDarkMode ? 'bg-indigo-600 hover:bg-indigo-500' : 'bg-blue-500 text-white hover:bg-gray-700'
+            isDarkMode
+              ? 'bg-indigo-600 hover:bg-indigo-500'
+              : 'bg-blue-500 text-white hover:bg-gray-700'
           }`}
         >
           Log In
@@ -105,7 +132,7 @@ const LoginForm = () => {
           <Link
             to="/forget-password"
             className={`hover:underline ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
+              isDarkMode ? 'text-gray-300' : 'text-gray-400'
             }`}
           >
             Forgot Password?
@@ -113,7 +140,7 @@ const LoginForm = () => {
           <Link
             to="/sign-up"
             className={`hover:underline ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
+              isDarkMode ? 'text-gray-300' : 'text-gray-400'
             }`}
           >
             Create Account

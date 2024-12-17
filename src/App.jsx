@@ -7,8 +7,8 @@ import Home from './Pages/Home';
 import { ThemeProvider } from './context/Button/ThemeProvider';
 import PersonalProfileForm from './Forms/PersonalProfileForm';
 import FamilyRelationshipsForm from './Forms/FamilyRelationshipsForm';
-import DailyScheduleForm from './Forms/DailyScheduleForm';
-import CommunicationForm from './Forms/CommunicationForm';
+import DailyScheduleForm from './Forms/EducationForm';
+import CommunicationForm from './Forms/WorkForm';
 import Calendar from './Pages/Calendar';
 
 export default function App() {

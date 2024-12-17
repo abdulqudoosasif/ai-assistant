@@ -32,7 +32,8 @@ const MultiStepForm = () => {
 
   const formFields = { 
     "Personal Profile": [
-      { name: "fullName", label: "Full Name", placeholder: "John Doe" },
+      { name: "firstName", label: "First Name", placeholder: "John" },
+      { name: "lastName", label: "Last Name", placeholder: "Doe" },
       { name: "dob", label: "Date of Birth", placeholder: "YYYY-MM-DD" },
       { name: "address", label: "Address", placeholder: "123 Main St" },
       { name: "phone", label: "Phone", placeholder: "+1-123-456-7890" },
@@ -167,18 +168,8 @@ const MultiStepForm = () => {
       </button>
 
       {/* Background shapes */}
-      <div className="absolute w-[90%] max-w-[430px] h-[520px]">
-        <div
-          className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -top-10 -left-10 sm:-top-20 sm:-left-20 ${
-            isDarkMode ? 'bg-gradient-to-br from-purple-700 to-indigo-500' : 'bg-gradient-to-br  from-blue-500 to-[#a4acc1]'
-          }`}
-        ></div>
-        <div
-          className={`absolute w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full -bottom-10 -right-6 sm:-bottom-20 sm:-right-8 ${
-            isDarkMode ? 'bg-gradient-to-r from-purple-700 to-indigo-500' : 'bg-gradient-to-br  to-blue-500 from-[#a4acc1]'
-          }`}
-        ></div>
-      </div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"></div>
 
       {/* MultiStep Form */}
       <div

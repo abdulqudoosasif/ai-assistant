@@ -8,7 +8,7 @@ const AssistantProfileSection = () => {
   ];
 
   return (
-    <div className="w-72  bg-gray-800 m-2 text-gray-200 p-6 rounded-lg shadow-md">
+    <div className="w-72 lg:block md:block hidden  bg-gray-800 m-2 text-gray-200 p-6 rounded-lg shadow-md">
       <div className="flex flex-col items-center">
         <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-green-400 rounded-full flex items-center justify-center text-white text-2xl font-bold">
           AI
