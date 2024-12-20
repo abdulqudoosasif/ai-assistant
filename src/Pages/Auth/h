@@ -1,0 +1,154 @@
+{
+    
+  "personal_profile": {
+    "first_name": "",
+    "last_name": "",
+    "date_of_birth": "",
+    "address": "",
+    "phone": "",
+    "email": "",
+    "nationality": "",
+    "languages_spoken": "",
+    "education": [
+      {
+        
+        "date_start": "",
+        "date_end": "",
+        "institution_name": "",
+        "specialty": "",
+        "degree": "",
+        "address": "",
+        "city": "",
+        "state": "",
+        "zip_code": "",
+        "country": "",
+        "achievements": ""
+      }
+    ],
+    "work": [
+      {
+        "from_date": "",
+        "to_date": "",
+        "position": "",
+        "company": "",
+        "address": "",
+        "city": "",
+        "state": "",
+        "zip_code": "",
+        "country": "",
+        "supervisor_name": "",
+        "supervisor_phone": "",
+        "supervisor_email": "",
+        "responsibilities": "",
+        "achievements": ""
+      }
+    ],
+    "family_relationship": [
+      {
+        "name": "",
+        "relationship": "",
+        "birthday": "",
+        "notes": "",
+        "phone": "",
+        "email": ""
+      }
+    ],
+    "car": [
+      {
+        "make": "",
+        "model": "",
+        "year":null ,
+        "vin": "",
+        "licence_plate": "",
+        "date_purchased": "",
+        "odometer_at_purchase": null,
+        "total_purchase_price": null,
+        "interest_rate": null,
+        "down_payment": null,
+        "financed_amount": null,
+        "monthly_payment":null
+      }
+    ],
+    "real_estate": [
+      {
+        "type": "",
+        "sq_ft": null,
+        "lot_size": null,
+        "address": "",
+        "city": "",
+        "state": "",
+        "zip_code": "",
+        "country": "",
+        "year_built": null
+      }
+    ],
+    "mortgage": [
+      {
+        "real_estate": null,
+        "financial_institution": "",
+        "monthly_amount": null,
+        "notes": "",
+        "start_date": "",
+        "period": "",
+        "property_cost":null,
+        "down_percent": null,
+        "down_payment": null,
+        "loan_amount": null,
+        "interest_rate": null,
+        "apr":null,
+        "upfront_cost": null
+      }
+    ],
+    "health_fitness": {
+      "blood_type": "",
+      "allergies": "",
+      "medications": ""
+    },
+    "travel_history": [
+      {
+        "destination": "",
+        "date_start": "",
+        "date_end": "",
+        "notes": ""
+      }
+    ],
+    "travel_membership": [
+      {
+        "type": "",
+        "company": "",
+        "membership_number": "",
+        "status": "",
+        "notes": ""
+      }
+    ],
+    "personal_preference": [
+      {
+        "type": "",
+        "favorite_item": ""
+      }
+    ],
+    "celebration": [
+      {
+        "event": "",
+        "person": "",
+        "date": "",
+        "first_event_date": "",
+        "notes": ""
+      }
+    ],
+    "insurance": [
+      {
+        "type": "",
+        "provider": "",
+        "policy_number": "",
+        "start_date": "",
+        "end_date": "",
+        "premium": null,
+        "coverage_details": "",
+        "linked_asset": "",
+        "notes": ""
+      }
+    ]
+  }
+}
+

@@ -10,6 +10,7 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState('');
   const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
 
@@ -44,11 +45,11 @@ const LoginForm = () => {
         navigate('/multi-step-form');
       } else {
         const errorData = await response.json();
-        alert(errorData.detail || 'Login Failed. Please try again.');
+        setServerError( 'Login failed. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('An error occurred. Please try again.');
+      setServerError('An error occurred. Please try again.');
     }
   };
 
@@ -79,6 +80,7 @@ const LoginForm = () => {
         }`}
       >
         <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">Log In</h3>
+
 
         <label className="block text-sm font-medium mt-4">Username</label>
         <input
@@ -115,7 +117,10 @@ const LoginForm = () => {
           </span>
         </div>
         {errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-
+           {/* Server Error */}
+       {serverError && (
+          <p className="text-red-500 mt-1 text-center text-sm">{serverError}</p>
+        )}
         <button
           type="button"
           onClick={handleLogin}

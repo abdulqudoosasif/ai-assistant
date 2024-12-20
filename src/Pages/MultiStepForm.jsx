@@ -9,126 +9,62 @@ const MultiStepForm = () => {
   const [formData, setFormData] = useState({});
   const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
   const steps = [
     "Personal Profile",
-    "Family and Relationships",
-    "Daily Schedule and Tasks",
-    "Communication",
-    "Financial Information",
-    "Health and Fitness",
-    "Travel",
-    "Personal Preferences",
-    "Digital Data",
-    "Professional Information",
-    "Recent Updates",
-    "Contextual and Historical Information",
-    "Security and Preferences",
-    "Entertainment and Leisure",
-    "Learning and Growth",
-    "Smart Home Integration",
-    "Assets",
-    "Insurance",
+    "Education",
+    "Work",
+    // "Family and Relationships",
+    // "Cars",
+    // "Real Estate",
+    // "Mortgage",
+    // "Health and Fitness",
+    // "Travel History",
+    // "Travel Memberships",
+    // "Personal Preferences",
+    // "Celebrations",
+    // "Insurance",
   ];
 
-  const formFields = { 
+  const formFields = {
     "Personal Profile": [
       { name: "firstName", label: "First Name", placeholder: "John" },
       { name: "lastName", label: "Last Name", placeholder: "Doe" },
       { name: "dob", label: "Date of Birth", placeholder: "YYYY-MM-DD" },
-      { name: "address", label: "Address", placeholder: "123 Main St" },
+      {
+        name: "address",
+        label: "Address",
+        placeholder: "123 Main St, Houston, TX",
+      },
       { name: "phone", label: "Phone", placeholder: "+1-123-456-7890" },
       { name: "email", label: "Email", placeholder: "example@mail.com" },
       { name: "nationality", label: "Nationality", placeholder: "American" },
-      { name: "languages", label: "Languages Spoken", placeholder: "English, Spanish" },
-      { name: "education", label: "Education", placeholder: "MBA, University of Texas" },
-      { name: "workHistory", label: "Work History", placeholder: "Manager at ABC Corp" },
-      { name: "hobbies", label: "Hobbies", placeholder: "Cooking, Hiking, Soccer" },
+      {
+        name: "languages",
+        label: "Languages Spoken",
+        placeholder: "English, Spanish",
+      },
     ],
-    "Family and Relationships": [
-      { name: "name", label: "Name", placeholder: "Jane Doe" },
-      { name: "relationship", label: "Relationship", placeholder: "Spouse" },
-      { name: "birthday", label: "Birthday", placeholder: "YYYY-MM-DD" },
-      { name: "notes", label: "Notes", placeholder: "Likes yoga and travel" },
-    ],
-    "Daily Schedule and Tasks": [
-      { name: "date", label: "Date", placeholder: "YYYY-MM-DD" },
-      { name: "time", label: "Time", placeholder: "9:00 AM" },
-      { name: "event", label: "Event", placeholder: "Dentist Appointment" },
-      { name: "notes", label: "Notes", placeholder: "For Liam" },
-    ],
-    "Communication": [
-      { name: "contactName", label: "Contact Name", placeholder: "Jane Doe" },
-      { name: "relation", label: "Relation", placeholder: "Spouse" },
-      { name: "phone", label: "Phone", placeholder: "+1-123-456-7890" },
-      { name: "email", label: "Email", placeholder: "jane.doe@example.com" },
-    ],
-    "Financial Information": [
-      { name: "item", label: "Item", placeholder: "Mortgage Payment" },
-      { name: "monthlyAmount", label: "Monthly Amount", placeholder: "$2,500" },
-      { name: "notes", label: "Notes", placeholder: "30-year loan, 3.5%" },
-    ],
-    "Health and Fitness": [
-      { name: "healthGoals", label: "Current Health Goals", placeholder: "Lose 5 lbs" },
-      { name: "allergies", label: "Allergies", placeholder: "None" },
-      { name: "medications", label: "Medications", placeholder: "Vitamin D Supplement" },
-    ],
-    "Travel": [
-      { name: "destination", label: "Destination", placeholder: "Orlando, FL" },
-      { name: "dates", label: "Dates", placeholder: "YYYY-MM-DD to YYYY-MM-DD" },
-      { name: "notes", label: "Notes", placeholder: "Family vacation to Disney" },
-    ],
-    "Personal Preferences": [
-      { name: "type", label: "Type", placeholder: "Restaurant" },
-      { name: "favoriteItem", label: "Favorite Item", placeholder: "Tex-Mex Grill" },
-    ],
-    "Digital Data": [
-      { name: "device", label: "Device", placeholder: "Laptop" },
-      { name: "type", label: "Type", placeholder: "MacBook Pro" },
-      { name: "notes", label: "Notes", placeholder: "Work device" },
-    ],
-    "Professional Information": [
-      { name: "currentRole", label: "Current Role", placeholder: "Project Manager, XYZ Inc" },
-      { name: "certifications", label: "Certifications", placeholder: "PMP, Six Sigma" },
-    ],
-    "Recent Updates": [
-      { name: "date", label: "Date", placeholder: "YYYY-MM-DD" },
-      { name: "update", label: "Update", placeholder: "Bought a new car" },
-    ],
-    "Contextual and Historical Information": [
-      { name: "event", label: "Event", placeholder: "Wedding Anniversary" },
-      { name: "date", label: "Date", placeholder: "YYYY-MM-DD" },
-      { name: "notes", label: "Notes", placeholder: "Celebrate with dinner" },
-    ],
-    "Security and Preferences": [
-      { name: "field", label: "Field", placeholder: "Emergency Contact" },
-      { name: "value", label: "Value", placeholder: "Jane Doe" },
-    ],
-    "Entertainment and Leisure": [
-      { name: "field", label: "Field", placeholder: "Favorite Game" },
-      { name: "value", label: "Value", placeholder: "FIFA 2024" },
-    ],
-    "Learning and Growth": [
-      { name: "learningGoal", label: "Current Learning Goal", placeholder: "Learn Python Programming" },
-      { name: "courses", label: "Courses Enrolled", placeholder: "DataCamp: Python Basics" },
-    ],
-    "Smart Home Integration": [
-      { name: "device", label: "Device", placeholder: "Thermostat" },
-      { name: "type", label: "Type", placeholder: "Nest Thermostat" },
-      { name: "notes", label: "Notes", placeholder: "Auto temperature control" },
-    ],
-    "Assets": [
-      { name: "assetType", label: "Asset Type", placeholder: "Home" },
-      { name: "description", label: "Description", placeholder: "4-bedroom house" },
-      { name: "datePurchased", label: "Date Purchased", placeholder: "YYYY-MM-DD" },
-      { name: "purchasePrice", label: "Purchase Price", placeholder: "$350,000" },
-    ],
-    "Insurance": [
-      { name: "type", label: "Type", placeholder: "Home" },
-      { name: "provider", label: "Provider", placeholder: "State Farm" },
-      { name: "policyNumber", label: "Policy Number", placeholder: "12345ABC" },
-      { name: "startDate", label: "Start Date", placeholder: "YYYY-MM-DD" },
-      { name: "premium", label: "Premium", placeholder: "$150" },
-      { name: "coverageDetails", label: "Coverage Details", placeholder: "Fire, Theft, Flood" },
+    Education: [
+      { name: "dateStart", label: "Date Start", placeholder: "YYYY-MM-DD" },
+      { name: "dateEnd", label: "Date End", placeholder: "YYYY-MM-DD" },
+      {
+        name: "name",
+        label: "Institution Name",
+        placeholder: "University Name",
+      },
+      { name: "specialty", label: "Specialty", placeholder: "Economics" },
+      { name: "degree", label: "Degree", placeholder: "BS, MBA" },
+      { name: "address", label: "Address", placeholder: "123 Street Name" },
+      { name: "city", label: "City", placeholder: "City Name" },
+      { name: "state", label: "State", placeholder: "State Code (e.g., CA)" },
+      { name: "zip", label: "ZIP Code", placeholder: "Postal Code" },
+      { name: "country", label: "Country", placeholder: "Country Name" },
+      {
+        name: "phoneNumber",
+        label: "Phone Number",
+        placeholder: "Phone Number",
+      },
     ],
   };
 
@@ -139,13 +75,78 @@ const MultiStepForm = () => {
     }));
   };
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      alert("All steps completed!");
-      console.log("Form Data:", formData);
-      navigate("/home");
+  const handleNext = async () => {
+    const currentStepName = steps[currentStep];
+    const currentStepData = formData[currentStepName] || {}; // Current step's data
+
+    // Transform current step data to match the API format
+    const apiData = {};
+    if (currentStepName === "Personal Profile") {
+      apiData.first_name = currentStepData.firstName || "";
+      apiData.last_name = currentStepData.lastName || "";
+      apiData.date_of_birth = currentStepData.dob || "";
+      apiData.address = currentStepData.address || "";
+      apiData.phone = currentStepData.phone || "";
+      apiData.email = currentStepData.email || "";
+      apiData.nationality = currentStepData.nationality || "";
+      apiData.languages_spoken = currentStepData.languages || "";
+    } else if (currentStepName === "Education") {
+      apiData.education = [
+        {
+          date_start: currentStepData.dateStart || "",
+          date_end: currentStepData.dateEnd || "",
+          institution_name: currentStepData.name || "",
+          specialty: currentStepData.specialty || "",
+          degree: currentStepData.degree || "",
+          address: currentStepData.address || "",
+          city: currentStepData.city || "",
+          state: currentStepData.state || "",
+          zip_code: currentStepData.zip || "",
+          country: currentStepData.country || "",
+          phone_number: currentStepData.phoneNumber || "",
+        },
+      ];
+    }
+
+    try {
+      const response = await fetch(
+        "https://personalai-backend.onrender.com/api/profiles/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(apiData),
+        }
+      );
+
+      if (response.ok) {
+        console.log(`Step ${currentStepName} data submitted successfully.`);
+        if (currentStep < steps.length - 1) {
+          setCurrentStep((prev) => prev + 1); // Go to next step
+        } else {
+          alert("Form completed successfully!");
+          navigate("/home"); // Redirect on finish
+        }
+      } else {
+        const errorDetails = await response.json();
+        console.error(
+          `Error submitting step ${currentStepName} data:`,
+          errorDetails
+        );
+        alert(
+          `Failed to submit the form: ${
+            errorDetails.message || response.statusText
+          }`
+        );
+      }
+    } catch (error) {
+      console.error(
+        `Network error while submitting step ${currentStepName} data:`,
+        error
+      );
+      alert("Network error. Please try again later.");
     }
   };
 
@@ -164,7 +165,11 @@ const MultiStepForm = () => {
         onClick={toggleDarkMode}
         className="absolute py-1 z-50 px-3 top-1 right-1 rounded-md text-white text-sm font-semibold"
       >
-        {isDarkMode ? <IoSunny /> : <BsFillMoonStarsFill className="text-gray-800" />}
+        {isDarkMode ? (
+          <IoSunny />
+        ) : (
+          <BsFillMoonStarsFill className="text-gray-800" />
+        )}
       </button>
 
       {/* Background shapes */}
@@ -174,10 +179,14 @@ const MultiStepForm = () => {
       {/* MultiStep Form */}
       <div
         className={`relative w-full max-w-[400px] p-6 sm:p-10 rounded-lg backdrop-blur-md shadow-lg border ${
-          isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white/10 border-white/10"
+          isDarkMode
+            ? "bg-gray-800 border-gray-700"
+            : "bg-white/10 border-white/10"
         }`}
       >
-        <h3 className="text-xl font-semibold text-center mb-6">{steps[currentStep]}</h3>
+        <h3 className="text-xl font-semibold text-center mb-6">
+          {steps[currentStep]}
+        </h3>
         <StepForm
           stepName={steps[currentStep]}
           fields={formFields[steps[currentStep]] || []}
@@ -193,9 +202,11 @@ const MultiStepForm = () => {
                 : "bg-blue-500 text-white hover:bg-gray-700"
             }`}
           >
-            {currentStep < steps.length - 1 ? "Yes, continue to next Step" : "Finish"}
+            {currentStep < steps.length - 1
+              ? "Yes, continue to next Step"
+              : "Finish"}
           </button>
-          <button 
+          <button
             onClick={handleSkip}
             className={`w-full mt-4 py-2 rounded-md ${
               isDarkMode
@@ -203,7 +214,7 @@ const MultiStepForm = () => {
                 : " border border-black text-black"
             }`}
           >
-             Skip
+            Skip
           </button>
         </div>
       </div>
@@ -221,12 +232,14 @@ const StepForm = ({ stepName, fields, formData, onInputChange }) => {
             type="text"
             name={field.name}
             value={formData[field.name] || ""}
-            onChange={(e) => onInputChange(stepName, field.name, e.target.value)}
+            onChange={(e) =>
+              onInputChange(stepName, field.name, e.target.value)
+            }
             placeholder={field.placeholder}
             className={`w-full mt-2 p-3 rounded-md outline-none text-sm placeholder-gray-400 ${
               isDarkMode
-                ? 'bg-gray-700 text-gray-200 border-gray-600'
-                : 'bg-white/10 text-black border-[1px]'
+                ? "bg-gray-700 text-gray-200 border-gray-600"
+                : "bg-white/10 text-black border-[1px]"
             }`}
           />
         </div>

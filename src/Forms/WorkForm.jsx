@@ -19,7 +19,7 @@ const WorkForm = ({ onClose }) => {
     supervisorEmail: "",
   });
 
-  const { isDarkMode } = useTheme();
+  const { isDarkMode } = useTheme(); 
 
   const handleChange = (field, value) => {
     setFormData((prevData) => ({

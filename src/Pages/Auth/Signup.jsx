@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
-import { FaEye, FaEyeLowVision } from "react-icons/fa6";
+import { FaEye, FaEyeLowVision } from 'react-icons/fa6';
 import { IoSunny } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTheme } from '../../context/Button/ThemeProvider';
@@ -12,9 +12,9 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
-  const navigation =useNavigate()
-
+  const navigate = useNavigate();
   const { isDarkMode, toggleDarkMode } = useTheme();
 
   const validateForm = () => {
@@ -46,8 +46,11 @@ const Signup = () => {
   const handleSignUp = async () => {
     if (!validateForm()) return;
 
+    setIsLoading(true);
+
     try {
-      const response = await fetch('https://personalai-backend.onrender.com/api/register/', {
+      // Step 1: Signup the user
+      const signupResponse = await fetch('https://personalai-backend.onrender.com/api/register/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,16 +63,39 @@ const Signup = () => {
         }),
       });
 
-      if (response.ok) {
-        navigation('/')
-       
+      if (!signupResponse.ok) {
+        const errorData = await signupResponse.json();
+        alert(errorData.message || 'User may already exist.');
+        setIsLoading(false);
+        return;
+      }
+
+     
+      const loginResponse = await fetch('https://personalai-backend.onrender.com/api/token/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
+
+      if (loginResponse.ok) {
+        const loginData = await loginResponse.json();
+        
+        localStorage.setItem('token', loginData.access);
+        alert('Signup successful and logged in!');
+        navigate('/multi-step-form'); 
       } else {
-        const errorData = await response.json();
-        alert(errorData.message || 'Sign-Up Failed. Please try again.');
+        alert('Signup successful, but auto-login failed. Please log in manually.');
       }
     } catch (error) {
       console.error('Error:', error);
       alert('An error occurred. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -88,12 +114,8 @@ const Signup = () => {
       </button>
 
       {/* Background Shapes */}
-      <div
-        className="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20"
-      ></div>
-      <div
-        className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"
-      ></div>
+      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-500 rounded-full blur-3xl opacity-20"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-600 rounded-full blur-3xl opacity-20"></div>
 
       {/* Sign-Up Form */}
       <form
@@ -185,8 +207,9 @@ const Signup = () => {
               ? 'bg-indigo-600 hover:bg-indigo-500'
               : 'bg-blue-500 text-white hover:bg-gray-700'
           }`}
+          disabled={isLoading}
         >
-          Sign Up
+          {isLoading ? 'Signing Up...' : 'Sign Up'}
         </button>
 
         <div className="flex justify-between mt-4 text-sm">

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { AiFillSchedule } from "react-icons/ai";
-import { FaGamepad, FaPersonMilitaryToPerson } from "react-icons/fa6";
+import { FaFileContract, FaGamepad, FaPersonMilitaryToPerson } from "react-icons/fa6";
 import { IoBarChartSharp, IoCarSport, IoPersonSharp } from "react-icons/io5";
 import { MdFamilyRestroom, MdHealthAndSafety, MdSecurity, MdTipsAndUpdates, MdTravelExplore, MdWork } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
@@ -228,7 +228,7 @@ return (
         onClick={() => setShowTravelMembershipsForm(true)}
       >
         <div className="text-2xl flex items-start justify-center bg-gradient-to-br from-pink-500 to-purple-600 text-white rounded-md p-2 w-fit">
-        <FaGamepad />
+        <FaFileContract/>
         </div>
         <h3 className="text-lg font-bold mt-2 mb-1 leading-5">
         Travel Memberships
