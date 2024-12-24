@@ -127,7 +127,7 @@ const VehicleForm = ({ onClose }) => {
           className={`w-full mt-6 py-3 font-semibold rounded-md transition ${
             isDarkMode
               ? "bg-indigo-600 hover:bg-indigo-500"
-              : "bg-black text-white hover:bg-gray-700"
+              : "bg-blue-500 text-white hover:bg-blue-700"
           }`}
         >
           Save Vehicle Information

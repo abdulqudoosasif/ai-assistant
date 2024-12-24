@@ -7,52 +7,27 @@ import { useTheme } from "../context/Button/ThemeProvider";
 const MultiStepForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
+  const [profileId, setProfileId] = useState(null); 
   const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const steps = [
-    "Personal Profile",
-    "Education",
-    "Work",
-    // "Family and Relationships",
-    // "Cars",
-    // "Real Estate",
-    // "Mortgage",
-    // "Health and Fitness",
-    // "Travel History",
-    // "Travel Memberships",
-    // "Personal Preferences",
-    // "Celebrations",
-    // "Insurance",
-  ];
+  const steps = ["Personal Profile", "Education", "Work"];
 
   const formFields = {
     "Personal Profile": [
       { name: "firstName", label: "First Name", placeholder: "John" },
       { name: "lastName", label: "Last Name", placeholder: "Doe" },
       { name: "dob", label: "Date of Birth", placeholder: "YYYY-MM-DD" },
-      {
-        name: "address",
-        label: "Address",
-        placeholder: "123 Main St, Houston, TX",
-      },
+      { name: "address", label: "Address", placeholder: "123 Main St, Houston, TX" },
       { name: "phone", label: "Phone", placeholder: "+1-123-456-7890" },
       { name: "email", label: "Email", placeholder: "example@mail.com" },
       { name: "nationality", label: "Nationality", placeholder: "American" },
-      {
-        name: "languages",
-        label: "Languages Spoken",
-        placeholder: "English, Spanish",
-      },
+      { name: "languages", label: "Languages Spoken", placeholder: "English, Spanish" },
     ],
     Education: [
       { name: "dateStart", label: "Date Start", placeholder: "YYYY-MM-DD" },
       { name: "dateEnd", label: "Date End", placeholder: "YYYY-MM-DD" },
-      {
-        name: "name",
-        label: "Institution Name",
-        placeholder: "University Name",
-      },
+      { name: "name", label: "Institution Name", placeholder: "University Name" },
       { name: "specialty", label: "Specialty", placeholder: "Economics" },
       { name: "degree", label: "Degree", placeholder: "BS, MBA" },
       { name: "address", label: "Address", placeholder: "123 Street Name" },
@@ -60,11 +35,6 @@ const MultiStepForm = () => {
       { name: "state", label: "State", placeholder: "State Code (e.g., CA)" },
       { name: "zip", label: "ZIP Code", placeholder: "Postal Code" },
       { name: "country", label: "Country", placeholder: "Country Name" },
-      {
-        name: "phoneNumber",
-        label: "Phone Number",
-        placeholder: "Phone Number",
-      },
     ],
   };
 
@@ -77,24 +47,53 @@ const MultiStepForm = () => {
 
   const handleNext = async () => {
     const currentStepName = steps[currentStep];
-    const currentStepData = formData[currentStepName] || {}; // Current step's data
+    const currentStepData = formData[currentStepName] || {};
 
-    // Transform current step data to match the API format
-    const apiData = {};
-    if (currentStepName === "Personal Profile") {
-      apiData.first_name = currentStepData.firstName || "";
-      apiData.last_name = currentStepData.lastName || "";
-      apiData.date_of_birth = currentStepData.dob || "";
-      apiData.address = currentStepData.address || "";
-      apiData.phone = currentStepData.phone || "";
-      apiData.email = currentStepData.email || "";
-      apiData.nationality = currentStepData.nationality || "";
-      apiData.languages_spoken = currentStepData.languages || "";
-    } else if (currentStepName === "Education") {
-      apiData.education = [
-        {
-          date_start: currentStepData.dateStart || "",
-          date_end: currentStepData.dateEnd || "",
+    try {
+      if (currentStepName === "Personal Profile") {
+        const apiData = {
+          first_name: currentStepData.firstName || "",
+          last_name: currentStepData.lastName || "",
+          date_of_birth: currentStepData.dob || "",
+          address: currentStepData.address || "",
+          phone: currentStepData.phone || "",
+          email: currentStepData.email || "",
+          nationality: currentStepData.nationality || "",
+          languages_spoken: currentStepData.languages || "",
+        };
+
+        const response = await fetch(
+          "https://personalai-backend.onrender.com/api/profiles/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(apiData),
+          }
+        );
+
+        if (!response.ok) {
+          const errorDetails = await response.json();
+          throw new Error(
+            `Failed to submit the Personal Profile: ${
+              errorDetails.message || response.statusText
+            }`
+          );
+        }
+
+        const responseData = await response.json();
+        setProfileId(responseData.id);
+        console.log("Personal Profile submitted successfully.");
+      } else if (currentStepName === "Education") {
+        if (!profileId) {
+          throw new Error("Profile ID is not available. Please complete the Personal Profile step.");
+        }
+
+        const apiData = {
+          date_start: currentStepData.dateStart || null,
+          date_end: currentStepData.dateEnd || null,
           institution_name: currentStepData.name || "",
           specialty: currentStepData.specialty || "",
           degree: currentStepData.degree || "",
@@ -103,52 +102,45 @@ const MultiStepForm = () => {
           state: currentStepData.state || "",
           zip_code: currentStepData.zip || "",
           country: currentStepData.country || "",
-          phone_number: currentStepData.phoneNumber || "",
-        },
-      ];
-    }
+          achievements: "Achievements example", 
+        };
 
-    try {
-      const response = await fetch(
-        "https://personalai-backend.onrender.com/api/profiles/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(apiData),
-        }
-      );
+        const response = await fetch(
+          `https://personalai-backend.onrender.com/api/education/${profileId}/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(apiData),
+          }
+        );
 
-      if (response.ok) {
-        console.log(`Step ${currentStepName} data submitted successfully.`);
-        if (currentStep < steps.length - 1) {
-          setCurrentStep((prev) => prev + 1); // Go to next step
-        } else {
-          alert("Form completed successfully!");
-          navigate("/home"); // Redirect on finish
+        if (!response.ok) {
+          const errorDetails = await response.json();
+          throw new Error(
+            `Failed to submit the Education data: ${
+              errorDetails.message || response.statusText
+            }`
+          );
         }
+
+        console.log("Education data submitted successfully.");
+      }
+
+      if (currentStep < steps.length - 1) {
+        setCurrentStep((prev) => prev + 1);
       } else {
-        const errorDetails = await response.json();
-        console.error(
-          `Error submitting step ${currentStepName} data:`,
-          errorDetails
-        );
-        alert(
-          `Failed to submit the form: ${
-            errorDetails.message || response.statusText
-          }`
-        );
+        alert("Form completed successfully!");
+        navigate("/home");
       }
     } catch (error) {
-      console.error(
-        `Network error while submitting step ${currentStepName} data:`,
-        error
-      );
-      alert("Network error. Please try again later.");
+      console.error(`Error submitting step ${currentStepName}:`, error);
+      alert(error.message || "An unexpected error occurred. Please try again.");
     }
   };
+
 
   const handleSkip = () => {
     navigate("/home");
