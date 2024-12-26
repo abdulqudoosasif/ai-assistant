@@ -11,7 +11,12 @@ const MultiStepForm = () => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  const steps = ["Personal Profile", "Education", "Work"];
+  const steps = [
+     "Personal Profile",
+     "Education", 
+     "Work",
+     "Family and Relationships",
+    ];
 
   const formFields = {
     "Personal Profile": [
@@ -36,6 +41,29 @@ const MultiStepForm = () => {
       { name: "zip", label: "ZIP Code", placeholder: "Postal Code" },
       { name: "country", label: "Country", placeholder: "Country Name" },
     ],
+    "Work": [
+  { name: "from", label: "From", placeholder: "YYYY-MM-DD" },
+  { name: "to", label: "To", placeholder: "YYYY-MM-DD or Present" },
+  { name: "position", label: "Position", placeholder: "Job Title (e.g., Program Manager)" },
+  { name: "company", label: "Company", placeholder: "Company Name (e.g., Meta)" },
+  { name: "address", label: "Address", placeholder: "123 Street Name" },
+  { name: "city", label: "City", placeholder: "City Name" },
+  { name: "state", label: "State", placeholder: "State Code (e.g., CA)" },
+  { name: "zip", label: "ZIP Code", placeholder: "Postal Code" },
+  { name: "country", label: "Country", placeholder: "Country Name" },
+  { name: "phoneNumber", label: "Phone Number", placeholder: "Phone Number" },
+  { name: "superviser", label: "Supervisor Name", placeholder: "Supervisor Name" },
+  { name: "superviserPhone", label: "Supervisor Phone", placeholder: "Phone Number" },
+  { name: "superviserEmail", label: "Supervisor Email", placeholder: "Email Address" }
+],
+"Family and Relationships": [
+  { name: "name", label: "Name", placeholder: "Full Name (e.g., Jane Doe)" },
+  { name: "relationship", label: "Relationship", placeholder: "Relationship (e.g., Spouse)" },
+  { name: "birthday", label: "Birthday", placeholder: "YYYY-MM-DD" },
+  { name: "notes", label: "Notes", placeholder: "Additional Information (e.g., Likes yoga and travel)" },
+  { name: "phone", label: "Phone", placeholder: "Phone Number (e.g., +1-713-555-5678)" },
+  { name: "email", label: "Email", placeholder: "Email Address (e.g., jane.doe@example.com)" }
+],
   };
 
   const handleInputChange = (stepName, fieldName, value) => {
@@ -127,8 +155,88 @@ const MultiStepForm = () => {
         }
 
         console.log("Education data submitted successfully.");
+      }else if (currentStepName === "Work") {
+        if (!profileId) {
+          throw new Error("Profile ID is not available. Please complete the Personal Profile step.");
+        }
+        const apiData = {
+          from_date: currentStepData.from || null,
+          to_date: currentStepData.to || null,
+          position: currentStepData.position || "",
+          company: currentStepData.company || "",
+          address: currentStepData.address || "",
+          city: currentStepData.city || "",
+          state: currentStepData.state || "",
+          zip_code: currentStepData.zip || "",
+          country: currentStepData.country || "",
+          supervisor_name: currentStepData.superviser || "",
+          supervisor_phone: currentStepData.superviserPhone || "",
+          supervisor_email: currentStepData.superviserEmail || "",
+          responsibilities: "Responsibilities example", 
+          achievements: "Achievements example", 
+        };
+  
+        const response = await fetch(
+          `https://personalai-backend.onrender.com/api/work/${profileId}/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(apiData),
+          }
+        );
+  
+        if (!response.ok) {
+          const errorDetails = await response.json();
+          throw new Error(
+            `Failed to submit the Work data: ${
+              errorDetails.message || response.statusText
+            }`
+          );
+        }
+  
+        console.log("Work data submitted successfully.");
+      
+      }else if (currentStepName === "Family and Relationships") {
+        if (!profileId) {
+          throw new Error("Profile ID is not available. Please complete the Personal Profile step.");
+        }
+  
+        const apiData = {
+          name: currentStepData.name || "",
+          relationship: currentStepData.relationship || "",
+          birthday: currentStepData.birthday || null,
+          notes: currentStepData.notes || "",
+          phone: currentStepData.phone || "",
+          email: currentStepData.email || "",
+        };
+  
+        const response = await fetch(
+          `https://personalai-backend.onrender.com/api/family/${profileId}/`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(apiData),
+          }
+        );
+  
+        if (!response.ok) {
+          const errorDetails = await response.json();
+          throw new Error(
+            `Failed to submit the Family and Relationships data: ${
+              errorDetails.message || response.statusText
+            }`
+          );
+        }
+  
+        console.log("Family and Relationships data submitted successfully.");
       }
-
+    
       if (currentStep < steps.length - 1) {
         setCurrentStep((prev) => prev + 1);
       } else {

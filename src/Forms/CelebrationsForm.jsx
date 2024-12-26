@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useTheme } from "../context/Button/ThemeProvider";
-
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 const CelebrationsForm = ({ onClose }) => {
   const [celebrations, setCelebrations] = useState([
     { event: "Wedding Anniversary", person: "Wife", date: "2012-04-15", firstEvent: "2008", notes: "Celebrate every year with dinner" },
@@ -24,12 +25,14 @@ const CelebrationsForm = ({ onClose }) => {
 
   return (
     <div className="fixed mt-[12%] lg:mt-0 md:mt-0   z-20 p-3 inset-0 bg-opacity-30 backdrop-blur-sm flex justify-center items-center">
-      <form
+         
+     <form
         onSubmit={handleSubmit}
         className={`relative w-full max-w-[400px] max-h-[70vh] overflow-y-auto my-8 p-6 sm:p-10 rounded-lg shadow-lg border ${
           isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"
         }`}
       >
+          
         <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">
           Celebrations
         </h3>
@@ -41,6 +44,7 @@ const CelebrationsForm = ({ onClose }) => {
         >
           <IoClose size={20} />
         </button>
+        <SimpleBar className="flex-1 "> 
 
         {/* Celebrations Fields */}
         {celebrations.map((celebration, index) => (
@@ -117,7 +121,9 @@ const CelebrationsForm = ({ onClose }) => {
         >
           Save Celebration
         </button>
+        </SimpleBar>
       </form>
+     
     </div>
   );
 };

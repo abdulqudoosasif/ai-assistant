@@ -12,6 +12,7 @@ const LoginForm = () => {
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -26,6 +27,8 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     if (!validateForm()) return;
+
+    setIsLoading(true);
 
     try {
       const response = await fetch('https://personalai-backend.onrender.com/api/token/', {
@@ -42,7 +45,7 @@ const LoginForm = () => {
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.access);
-        navigate('/multi-step-form');
+        navigate('/home');
       } else {
         const errorData = await response.json();
         setServerError( 'Login failed. Please try again.');
@@ -50,6 +53,8 @@ const LoginForm = () => {
     } catch (error) {
       console.error('Error:', error);
       setServerError('An error occurred. Please try again.');
+    }finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,8 +134,9 @@ const LoginForm = () => {
               ? 'bg-indigo-600 hover:bg-indigo-500'
               : 'bg-blue-500 text-white hover:bg-gray-700'
           }`}
+          disabled={isLoading}
         >
-          Log In
+         {isLoading ? 'Loading...' : 'Login'}
         </button>
 
         <div className="flex justify-between mt-4 text-sm">

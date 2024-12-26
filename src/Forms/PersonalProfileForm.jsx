@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import { useTheme } from "../context/Button/ThemeProvider";
 
-const API_URL = "https://personalai-backend.onrender.com/api/onboarding/";
+const API_URL = "https://personalai-backend.onrender.com/api/profiles/";
 
 const PersonalProfileForm = ({ onClose }) => {
   const [formData, setFormData] = useState({

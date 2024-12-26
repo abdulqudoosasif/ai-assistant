@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { BsFillMoonStarsFill } from 'react-icons/bs';
 import { IoClose, IoSunny } from 'react-icons/io5';
 import { useTheme } from '../context/Button/ThemeProvider';
-
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 const FamilyRelationshipsForm = ({ onClose }) => {
   const [formData, setFormData] = useState([
     { name: '', relationship: '', birthday: '', notes: '' },
@@ -34,6 +35,7 @@ const FamilyRelationshipsForm = ({ onClose }) => {
             : "bg-white"
         }`}
       >
+        
             <button
           onClick={onClose}
           className="absolute top-2 left-2 border-2 w-fit rounded-sm hover:bg-red-600 hover:text-white"
@@ -43,7 +45,7 @@ const FamilyRelationshipsForm = ({ onClose }) => {
         <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">
           Family and Relationships
         </h3>
-
+<SimpleBar className="flex-1 "> 
         {formData.map((row, index) => (
           <div key={index} className="mt-4">
             <label className="block text-sm font-medium">Name</label>
@@ -94,6 +96,7 @@ const FamilyRelationshipsForm = ({ onClose }) => {
             ></textarea>
           </div>
         ))}
+        </SimpleBar>
         <button
           type="submit"
           className={`w-full mt-6 py-3 font-semibold rounded-md transition ${
@@ -104,6 +107,7 @@ const FamilyRelationshipsForm = ({ onClose }) => {
         >
           Save Relationships
         </button>
+        
       </form>
    </div>
   );

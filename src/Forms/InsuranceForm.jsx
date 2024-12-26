@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useTheme } from "../context/Button/ThemeProvider";
-
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 const InsuranceForm = ({ onClose }) => {
   const [insurance, setInsurance] = useState([
     {
@@ -41,6 +42,7 @@ const InsuranceForm = ({ onClose }) => {
           isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"
         }`}
       >
+        
         <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">
           Insurance Information
         </h3>
@@ -52,7 +54,7 @@ const InsuranceForm = ({ onClose }) => {
         >
           <IoClose size={20} />
         </button>
-
+        <SimpleBar className="flex-1 " >
         {/* Insurance Fields */}
         {insurance.map((policy, index) => (
           <div key={index} className="mt-4">
@@ -186,6 +188,7 @@ const InsuranceForm = ({ onClose }) => {
         >
           Save Insurance Info
         </button>
+        </SimpleBar>
       </form>
     </div>
   );

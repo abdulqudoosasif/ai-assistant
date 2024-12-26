@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useTheme } from "../context/Button/ThemeProvider";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 const HealthInfoForm = ({ onClose }) => {
   const [formData, setFormData] = useState({
@@ -31,6 +33,7 @@ const HealthInfoForm = ({ onClose }) => {
           isDarkMode ? "bg-gray-800 border-gray-700" : "bg-white"
         }`}
       >
+       
         <h3 className="text-xl sm:text-2xl font-semibold text-center mb-6">
           Health Information Form
         </h3>
@@ -42,6 +45,7 @@ const HealthInfoForm = ({ onClose }) => {
         >
           <IoClose size={20} />
         </button>
+        <SimpleBar className="flex-1 "> 
 
         {/* Input Fields */}
         {[
@@ -76,6 +80,7 @@ const HealthInfoForm = ({ onClose }) => {
         >
           Save Health Information
         </button>
+        </SimpleBar>
       </form>
     </div>
   );
