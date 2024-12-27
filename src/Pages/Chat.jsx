@@ -9,9 +9,9 @@ const Chat = () => {
   return (
     <div className="flex h-screen bg-gray-100 ">
       <Sidebar />
-      <SimpleBar className="flex-1 py-3 " style={{ height: "100vh" }}> 
+      <div className="flex-1 py-3 " style={{ height: "100vh" }}> 
        <ChatInterFace/>
-       </SimpleBar>
+       </div>
       <ProfileSection />
     </div>
   );

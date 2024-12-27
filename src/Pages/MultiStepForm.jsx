@@ -200,9 +200,7 @@ const MultiStepForm = () => {
         console.log("Work data submitted successfully.");
       
       }else if (currentStepName === "Family and Relationships") {
-        if (!profileId) {
-          throw new Error("Profile ID is not available. Please complete the Personal Profile step.");
-        }
+        if (!profileId) { throw new Error("Profile ID is not available. Please complete the Personal Profile step."); }
   
         const apiData = {
           name: currentStepData.name || "",

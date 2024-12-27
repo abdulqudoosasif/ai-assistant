@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-
 const ChatInterFace = () => {
   const [messages, setMessages] = useState([
     { sender: "AI", text: "Hi Abdul!" },
