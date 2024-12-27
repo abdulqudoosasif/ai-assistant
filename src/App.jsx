@@ -11,6 +11,7 @@ import DailyScheduleForm from './Forms/EducationForm';
 import CommunicationForm from './Forms/WorkForm';
 import Calendar from './Pages/Calendar';
 import Chat from './Pages/Chat';
+import Setting from './Pages/Setting';
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/communication-form" element={<CommunicationForm />} />
           <Route path="/calendar" element={<Calendar />} />
           <Route path="/chat" element={<Chat/>} />
+          <Route path="/setting" element={<Setting/>} />
         </Routes>
       </Router>
     </ThemeProvider>

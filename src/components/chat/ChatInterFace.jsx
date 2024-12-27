@@ -1,26 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
+
 const ChatInterFace = () => {
-  const [messages, setMessages] = useState([
-    { sender: "AI", text: "Hi Abdul!" },
-    {
-      sender: "AI",
-      text: "I am pleased to announce that on this beautiful magical day of the Fall Equinox...",
-    },
-    {
-      sender: "AI",
-      text: "we have released the first version of the chat-ui-kit-react library",
-    },
-    { sender: "AI", text: "Yes I am :)" },
-    { sender: "AI", text: "Thank You" },
-    { sender: "Me", text: "Hi, what's up?" },
-    { sender: "Me", text: "That's great news!" },
-    { sender: "Me", text: "You must be very excited" },
-    { sender: "Me", text: "I am so proud of your team :)" },
-    { sender: "Me", text: "Good luck with your new product!" },
-  ]);
+  const [messages, setMessages] = useState([]);
 
   const [newMessage, setNewMessage] = useState("");
   const chatBoxRef = useRef(null);
+  const token = localStorage.getItem("token");
 
   // Scroll to the bottom when messages change
   useEffect(() => {
@@ -29,9 +14,37 @@ const ChatInterFace = () => {
     }
   }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (newMessage.trim() !== "") {
-      setMessages([...messages, { sender: "Me", text: newMessage }]);
+      const userMessage = { sender: "Me", text: newMessage };
+      setMessages((prevMessages) => [...prevMessages, userMessage]);
+
+      // Send the message to the API
+      try {
+        const response = await fetch(
+          "https://personalai-backend.onrender.com/api/chat/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify({ message: newMessage }),
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data)
+          const aiMessage = { sender: "AI", text: data.message || "No response" };
+          setMessages((prevMessages) => [...prevMessages, aiMessage]);
+        } else {
+          console.error("Failed to fetch response from the API.");
+        }
+      } catch (error) {
+        console.error("Error while sending message:", error);
+      }
+
       setNewMessage("");
     }
   };

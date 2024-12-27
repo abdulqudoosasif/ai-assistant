@@ -19,6 +19,9 @@ const Sidebar = () => {
   const handleChat = () => {
     navigation('/chat');
   };
+  const handleSetting = () => {
+    navigation('/setting');
+  };
 
   return (
     <div>
@@ -34,7 +37,7 @@ const Sidebar = () => {
           <button onClick={handleCalendar} className="flex flex-col items-center my-4 text-sm">
             <div className="text-2xl"><BsCalendarEventFill /></div>
           </button>
-          <button className="flex flex-col items-center my-4 text-sm">
+          <button onClick={handleSetting} className="flex flex-col items-center my-4 text-sm">
             <div className="text-2xl"><IoSettings /></div>
           </button>
         </div>
@@ -66,7 +69,7 @@ const Sidebar = () => {
             <div className="text-2xl"><BsCalendarEventFill /></div>
             Calendar
           </button>
-          <button className="flex items-center my-4 gap-4 text-sm text-white">
+          <button  onClick={handleSetting} className="flex items-center my-4 gap-4 text-sm text-white">
             <div className="text-2xl"><IoSettings /></div>
             Setting
           </button>
